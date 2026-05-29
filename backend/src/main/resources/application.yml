@@ -1,0 +1,73 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+spring:
+  application:
+    name: devmatch-backend
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/devmatch?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      database: ${REDIS_DATABASE:0}
+      timeout: 5000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.devmatch.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT 配置
+jwt:
+  secret: ${JWT_SECRET:devmatch-dev-secret-key-change-before-deploy-2026}
+  access-expire: ${JWT_ACCESS_EXPIRE:7200}        # 2小时（秒）
+  refresh-expire: ${JWT_REFRESH_EXPIRE:604800}     # 7天（秒）
+
+# 文件上传目录
+upload:
+  path: ${UPLOAD_PATH:./uploads}
+  url-prefix: ${UPLOAD_URL_PREFIX:/uploads}
+
+# 平台配置
+platform:
+  commission-rate: ${PLATFORM_COMMISSION_RATE:0.05}     # 5% 佣金
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+logging:
+  level:
+    com.devmatch: debug
+    org.springframework.security: warn

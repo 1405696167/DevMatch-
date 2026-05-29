@@ -1,0 +1,24 @@
+# Build outputs
+backend/target/
+frontend/dist/
+
+# Dependencies
+frontend/node_modules/
+
+# Local uploads and runtime files
+uploads/
+*.log
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+**/application-local.yml
+**/application-dev.yml
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
