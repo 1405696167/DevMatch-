@@ -1,6 +1,6 @@
 # DevMatch
 
-DevMatch 是一个前后端分离的软件开发项目供需对接系统，包含企业端、开发者端和管理端。系统实现了需求发布、任务审核、开发者投标、企业选标、项目里程碑交付、钱包托管结算、评价信用和后台管理等基础功能。
+DevMatch 是一个基于 Spring Boot + Vue 3 的前后端分离软件开发项目供需对接系统，包含企业端、开发者端和管理端。系统实现了需求发布、任务审核、开发者投标、企业选标、项目里程碑交付、钱包托管结算、评价信用和后台管理等基础功能。
 
 ## 技术栈
 
@@ -69,7 +69,8 @@ BiYeSheJi/
 - Node.js 18+，npm
 - MySQL 8.x
 - Redis 6/7
-- Maven 3.8+，当前仓库未包含 `mvnw`
+
+后端通过 Java 17 运行 Spring Boot 主类启动。仓库中包含 `backend/pom.xml` 作为后端依赖配置文件，本地启动按 IDE/Cursor 的 Java 运行配置执行。
 
 ## 本地启动
 
@@ -149,18 +150,20 @@ UPLOAD_PATH
 
 ### 4. 启动后端
 
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-也可以在 IDE 中运行：
+在 IDE 或 Cursor 中使用 Java 运行后端主类：
 
 ```text
 com.devmatch.DevMatchApplication
 ```
 
-本地调试时，如果 IDE 生成了 classpath argfile，也可以用 Java 命令启动。该方式通常包含本机绝对路径，不适合作为通用启动脚本。
+本机调试时也可以使用 IDE/Cursor 生成的 classpath argfile 通过 `java` 命令启动，例如：
+
+```powershell
+cd C:\Users\15759\Desktop\BiYeSheJi
+& 'C:\Program Files\Java\jdk-17\bin\java.exe' '@<classpath-argfile>' 'com.devmatch.DevMatchApplication'
+```
+
+`<classpath-argfile>` 是本机 IDE/Cursor 生成的临时 classpath 文件路径，不同电脑上路径不同，不应写死为通用启动脚本。
 
 ### 5. 启动前端
 
@@ -298,10 +301,9 @@ application-local.yml
 
 后端：
 
-```bash
-cd backend
-mvn clean package
-mvn spring-boot:run
+```text
+使用 IDE/Cursor 的 Java 运行配置启动：
+com.devmatch.DevMatchApplication
 ```
 
 前端：
